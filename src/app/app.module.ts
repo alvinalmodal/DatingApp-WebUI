@@ -5,9 +5,10 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { NavComponent } from './nav/nav.component';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from './services/auth.service';
+import { ErrorInterceptorProvider } from './services/error.interceptor';
 import { HomeComponent } from './home/home.component';
 import { RegisterComponent } from './register/register.component';
+
 
 @NgModule({
   declarations: [
@@ -21,7 +22,7 @@ import { RegisterComponent } from './register/register.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [ ErrorInterceptorProvider ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
