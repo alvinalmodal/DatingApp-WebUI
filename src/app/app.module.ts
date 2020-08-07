@@ -14,7 +14,7 @@ import { RegisterComponent } from './register/register.component';
 import { MemberListComponent } from './member-list/member-list.component';
 import { ListsComponent } from './lists/lists.component';
 import { MessagesComponent } from './messages/messages.component';
-import {appRoutes} from './routes';
+import { appRoutes } from './routes';
 
 @NgModule({
   declarations: [
