@@ -4,7 +4,9 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:5000/api/v1/'
+  baseUrl: 'http://localhost:5000/api/v1/',
+  whitelistedDomains: 'localhost:5000',
+  blacklistedRoutes: 'localhost:5000/api/v1/auth'
 };
 
 /*
