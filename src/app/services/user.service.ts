@@ -19,4 +19,8 @@ export class UserService {
   getUser(id: number): Observable<User> {
     return this.http.get<User>(this.url + '/' + id);
   }
+
+  updateUser(id: number, user: User): any{
+    return this.http.put(`${this.url}/${id}`, user );
+  }
 }
