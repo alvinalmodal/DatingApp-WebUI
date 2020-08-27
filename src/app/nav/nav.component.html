@@ -14,22 +14,56 @@
     </ul>
 
     <div *ngIf="loggedIn()" class="dropdown" dropdown>
+      <span class="mr-1"><img src="{{ photoUrl }}" alt="" /></span>
       <a class="dropdown-toggle text-light" dropdownToggle>
-        Welcome {{authService.decodedToken.unique_name | titlecase}}
+        Welcome {{ authService.decodedToken.unique_name | titlecase }}
       </a>
-      <div class="dropdown-menu mt-3" aria-labelledby="dropdownMenuButton" *dropdownMenu>
-        <a class="dropdown-item" [routerLink]="['/member/edit']" ><i class="fa fa-user"></i>Edit Profile</a>
+      <div
+        class="dropdown-menu mt-3"
+        aria-labelledby="dropdownMenuButton"
+        *dropdownMenu
+      >
+        <a class="dropdown-item" [routerLink]="['/member/edit']"
+          ><i class="fa fa-user"></i>Edit Profile</a
+        >
         <div class="dropdown-divider"></div>
-        <a class="dropdown-item" href="#" (click)="logout()"><i class="fa fa-sign-out"></i>Logout</a>
+        <a class="dropdown-item" href="#" (click)="logout()"
+          ><i class="fa fa-sign-out"></i>Logout</a
+        >
       </div>
     </div>
 
-    <form *ngIf="!loggedIn()" #loginForm="ngForm" class="form-inline my-2 my-lg-0" (ngSubmit)="login()">
-      <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username" name="username" required [(ngModel)]="model.Username">
-      <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password" name="password" required [(ngModel)]="model.Password">
-      <button [disabled]="!loginForm.valid" class="btn btn-success my-2 my-sm-0" type="submit">Login</button>
+    <form
+      *ngIf="!loggedIn()"
+      #loginForm="ngForm"
+      class="form-inline my-2 my-lg-0"
+      (ngSubmit)="login()"
+    >
+      <input
+        class="form-control mr-sm-2"
+        type="text"
+        placeholder="Username"
+        aria-label="Username"
+        name="username"
+        required
+        [(ngModel)]="model.Username"
+      />
+      <input
+        class="form-control mr-sm-2"
+        type="password"
+        placeholder="Password"
+        aria-label="Password"
+        name="password"
+        required
+        [(ngModel)]="model.Password"
+      />
+      <button
+        [disabled]="!loginForm.valid"
+        class="btn btn-success my-2 my-sm-0"
+        type="submit"
+      >
+        Login
+      </button>
     </form>
   </div>
-     
-  </nav>
-
+</nav>
