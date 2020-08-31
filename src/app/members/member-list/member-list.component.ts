@@ -50,7 +50,6 @@ export class MemberListComponent implements OnInit {
   }
 
   loadUsers(): any {
-    console.log(this.userParams);
     this.userService
       .getUsers(
         this.pagination.currentPage,
