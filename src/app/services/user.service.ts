@@ -111,4 +111,14 @@ export class UserService {
         })
       );
   }
+
+  getMessageThread(id: number, recipientId: number): any {
+    return this.http.get<Message[]>(
+      `${this.url}/${id}/messages/thread/${recipientId}`
+    );
+  }
+
+  sendMessage(id: number, message: Message): any {
+    return this.http.post(`${this.url}/${id}/messages`, message);
+  }
 }
