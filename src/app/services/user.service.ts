@@ -112,7 +112,7 @@ export class UserService {
       );
   }
 
-  getMessageThread(id: number, recipientId: number): any {
+  getMessageThread(id: number, recipientId: number): Observable<Message[]> {
     return this.http.get<Message[]>(
       `${this.url}/${id}/messages/thread/${recipientId}`
     );
@@ -124,5 +124,11 @@ export class UserService {
 
   deleteMessage(id: number, userId: number): any {
     return this.http.post(`${this.url}/${userId}/messages/${id}`, {});
+  }
+
+  markAsRead(userId: number, messageId: number): any {
+    this.http
+      .post(`${this.url}/${userId}/messages/${messageId}/read`, {})
+      .subscribe();
   }
 }
