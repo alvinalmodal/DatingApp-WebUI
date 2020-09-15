@@ -1,21 +1,38 @@
 import { Injectable } from '@angular/core';
-import { CanActivate, ActivatedRouteSnapshot, RouterStateSnapshot, UrlTree } from '@angular/router';
+import {
+  CanActivate,
+  ActivatedRouteSnapshot,
+  RouterStateSnapshot,
+  UrlTree,
+} from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { AlertifyService } from '../services/alertify.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard implements CanActivate {
-  constructor(private authService: AuthService,
+  constructor(
+    private authService: AuthService,
     private router: Router,
-    private alertify: AlertifyService ){
+    private alertify: AlertifyService
+  ) {}
+  canActivate(next: ActivatedRouteSnapshot): boolean {
+    const roles = next.firstChild.data['roles'] as Array<string>;
 
-  }
-  canActivate(): boolean {
-    if (this.authService.loggedIn()){
+    if (roles) {
+      const match = this.authService.roleMatch(roles);
+      if (match) {
+        return true;
+      } else {
+        this.router.navigate(['members']);
+        this.alertify.error('You are not authorized to access this area.');
+      }
+    }
+
+    if (this.authService.loggedIn()) {
       return true;
     }
 
