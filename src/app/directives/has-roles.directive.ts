@@ -27,7 +27,6 @@ export class HasRolesDirective implements OnInit {
       this.viewContainerRef.clear();
     }
 
-    console.log(this.appHasRoles);
     // if user has role then render the element
     if (this.authService.roleMatch(this.appHasRoles)) {
       if (!this.isVisible) {
