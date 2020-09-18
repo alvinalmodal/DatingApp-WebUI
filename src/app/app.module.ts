@@ -6,6 +6,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { TabsModule } from 'ngx-bootstrap/tabs';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { ModalModule } from 'ngx-bootstrap/modal';
 import { RouterModule } from '@angular/router';
 import { NgxGalleryModule } from 'ngx-gallery-9';
 
@@ -43,6 +44,7 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { HasRolesDirective } from './directives/has-roles.directive';
 import { UserManagementComponent } from './admin/user-management/user-management.component';
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
+import { RolesModalComponent } from './admin/roles-modal/roles-modal.component';
 
 export function tokenGetter(): string {
   return localStorage.getItem('token');
@@ -67,6 +69,7 @@ export function tokenGetter(): string {
     HasRolesDirective,
     UserManagementComponent,
     PhotoManagementComponent,
+    RolesModalComponent,
   ],
   imports: [
     BrowserModule,
@@ -81,6 +84,7 @@ export function tokenGetter(): string {
     ButtonsModule.forRoot(),
     RouterModule.forRoot(appRoutes),
     NgxGalleryModule,
+    ModalModule.forRoot(),
     FileUploadModule,
     JwtModule.forRoot({
       config: {
@@ -103,6 +107,7 @@ export function tokenGetter(): string {
     ListResolver,
     PreventUnsavedChanges,
   ],
+  entryComponents: [RolesModalComponent],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
