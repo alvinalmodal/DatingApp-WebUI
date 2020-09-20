@@ -3,6 +3,7 @@ import { User } from '../../models/user';
 import { AdminService } from '../../services/admin.service';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from '../roles-modal/roles-modal.component';
+import { AlertifyService } from '../../services/alertify.service';
 
 @Component({
   selector: 'app-user-management',
@@ -15,7 +16,8 @@ export class UserManagementComponent implements OnInit {
 
   constructor(
     private adminService: AdminService,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+    private alertifyService: AlertifyService
   ) {}
 
   ngOnInit(): void {
@@ -29,7 +31,7 @@ export class UserManagementComponent implements OnInit {
         console.log('users in user management', this.users);
       },
       (error) => {
-        console.log(error);
+        this.alertifyService.error(error);
       }
     );
   }
@@ -42,7 +44,24 @@ export class UserManagementComponent implements OnInit {
     this.bsModalRef = this.modalService.show(RolesModalComponent, {
       initialState,
     });
-    this.bsModalRef.content.closeBtnName = 'Close';
+    this.bsModalRef.content.updateSelectedRoles.subscribe((values) => {
+      const rolesToUpdate = {
+        roleNames: [
+          ...values.filter((el) => el.checked === true).map((el) => el.name),
+        ],
+      };
+      if (rolesToUpdate) {
+        this.adminService.updateUserRoles(user, rolesToUpdate).subscribe(
+          () => {
+            user.roles = [...rolesToUpdate.roleNames];
+          },
+          (error) => {
+            console.log(error);
+            this.alertifyService.error(error);
+          }
+        );
+      }
+    });
   }
 
   private getRolesArray(user): any {
